@@ -1,0 +1,23 @@
+body {
+  background: rgba(255,255,255,0.7);
+}
+
+.container {
+  margin-top: 2em;
+}
+
+#current.alert img {
+  vertical-align: baseline;
+}
+
+table#forecast th,
+table#forecast td {
+  text-align: center;
+  vertical-align: middle;
+}
+table#forecast img {
+  width: 32px;
+}
+table#forecast tbody td:first-child {
+  font-weight: bold;
+}
