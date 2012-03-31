@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Zhusee</string>
+	<key>Builder Version</key>
+	<string>7536.2.3</string>
+	<key>CFBundleDisplayName</key>
+	<string>台灣氣象資訊</string>
+	<key>CFBundleIdentifier</key>
+	<string>net.zhusee2.extensions.taiwanweather</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Identifier</key>
+				<string>btnWeather</string>
+				<key>Image</key>
+				<string>61-brightness.png</string>
+				<key>Label</key>
+				<string>台灣氣象資訊</string>
+				<key>Palette Label</key>
+				<string>氣象資訊</string>
+				<key>Tool Tip</key>
+				<string>台北市，25ºC</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict/>
+	</dict>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict/>
+	</dict>
+</dict>
+</plist>
