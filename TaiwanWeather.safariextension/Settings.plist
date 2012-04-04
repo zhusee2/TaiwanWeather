@@ -62,6 +62,16 @@
 			<string>Lienchiang_County</string>
 		</array>
 	</dict>
+  <dict>
+		<key>DefaultValue</key>
+		<true/>
+		<key>Key</key>
+		<string>optShowCurrent</string>
+		<key>Title</key>
+		<string>在工具列按鈕上顯示即時觀測氣溫</string>
+		<key>Type</key>
+		<string>CheckBox</string>
+	</dict>
 	<dict>
 		<key>DefaultValue</key>
 		<true/>

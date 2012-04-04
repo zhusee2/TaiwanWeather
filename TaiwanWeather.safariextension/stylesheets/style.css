@@ -15,8 +15,11 @@ table#forecast td {
   text-align: center;
   vertical-align: middle;
 }
+table#forecast span.desc {
+  display: none;
+}
 table#forecast img {
-  width: 32px;
+  width: 45px;
 }
 table#forecast tbody td:first-child {
   font-weight: bold;
