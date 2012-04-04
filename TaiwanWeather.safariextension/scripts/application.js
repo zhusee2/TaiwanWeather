@@ -5,6 +5,7 @@ try {
 } catch(e) {}
     
 $(document).ready(function() {
+  updateCurrent();
   updateForecast();
 });
 
@@ -77,9 +78,37 @@ function updateForecast() {
     });
     
     //Update last-update badge
-    $('span.lastUpdate').text(result.lastUpdate);
+    $('#forecast span.lastUpdate').text(result.lastUpdate);
 
     repaintForecastTable();
+  });
+
+}
+
+function updateCurrent() {
+  var queryUrl = 'http://www.cwb.gov.tw/pda/observe/real/46692.htm', //Taipei
+      realtimeData = {};
+  
+  $.get(queryUrl, function(data) {
+    var dataList = $(data).find('li.smallfield span.headerText');
+
+    realtime = {
+      time: dataList[0].innerText,
+      location: $(data).find('li.selectRight option:selected').text(),
+      weather: dataList[1].innerText,
+      temp: dataList[2].innerText
+    }
+    
+    try {
+      realtime.weatherIcon = $(dataList[1]).find('img').attr('src').replace(/^\//, 'http://www.cwb.gov.tw/');
+    } catch(e) {
+      realtime.weatherIcon = null;
+    }
+    
+    $('#current span.desc').html(realtime.weather + ' ' + realtime.temp + '&deg;C');
+    $('#current img').attr('src', realtime.weatherIcon);
+    $('#current small.lastUpdate span.location').text(realtime.location);
+    $('#current small.lastUpdate span.time').text(realtime.time);
   });
 
 }

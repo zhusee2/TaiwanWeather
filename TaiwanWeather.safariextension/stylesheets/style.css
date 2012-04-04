@@ -7,7 +7,12 @@ body {
 }
 
 #current.alert img {
-  vertical-align: baseline;
+  height: 24px;
+  vertical-align: bottom;
+}
+#current small.lastUpdate {
+  margin-top: 6px;
+  float: right;
 }
 
 table#forecast th,
