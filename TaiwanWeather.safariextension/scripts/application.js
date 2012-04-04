@@ -41,7 +41,7 @@ function updateForecast() {
     var table = $('table#forecast');
     
     var paintCell = function(cell, data) {
-      $(cell).empty();
+      $(cell).empty().attr('title', $(data.desc).text());
       $('<img>').attr('src', data.image).appendTo(cell);
       $('<p>').html(data.desc).appendTo(cell);
     }
