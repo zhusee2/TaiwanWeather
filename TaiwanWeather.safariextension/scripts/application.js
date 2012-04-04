@@ -77,5 +77,5 @@ function updateForecast() {
 
     repaintForecastTable();
   });
-    
+
 }
