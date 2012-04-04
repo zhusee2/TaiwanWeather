@@ -2,7 +2,11 @@ try {
   var weatherArea = safari.extension.settings.optWeatherArea,
       showForecast = safari.extension.settings.optShowForecast,
       globalResult = null;
-} catch(e) {}
+} catch(e) {
+  var weatherArea = 'Taipei_City',
+      showForecast = true,
+      globalResult = null;
+}
     
 $(document).ready(function() {
   updateCurrent();
