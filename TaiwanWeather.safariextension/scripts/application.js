@@ -61,7 +61,8 @@ function updateForecast() {
     var result = {
       date: $(data).find('thead th:not(:first-child)'),
       day: $(data).find('tbody tr:first-child td'),
-      night: $(data).find('tbody tr+tr td')
+      night: $(data).find('tbody tr+tr td'),
+      lastUpdate: $(data).find('span.Issued').text()
     };
     
     //Reformat date header
@@ -74,6 +75,9 @@ function updateForecast() {
     result['night'].each(function(index, cell) {
       forecastTable[index]['night'] = (reformatCell(index, cell));
     });
+    
+    //Update last-update badge
+    $('span.lastUpdate').text(result.lastUpdate);
 
     repaintForecastTable();
   });
