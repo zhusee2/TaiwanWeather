@@ -1,8 +1,8 @@
-/*
-var weatherArea = safari.extension.settings.optWeatherArea,
-    showForecast = safari.extension.settings.optShowForecast,
-    globalResult = null;
-*/
+try {
+  var weatherArea = safari.extension.settings.optWeatherArea,
+      showForecast = safari.extension.settings.optShowForecast,
+      globalResult = null;
+} catch(e) {}
     
 $(document).ready(function() {
   updateForecast();
