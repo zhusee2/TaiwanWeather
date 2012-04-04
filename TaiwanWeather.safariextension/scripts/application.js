@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 
 function updateForecast() {
-  var queryUrl = "http://www.cwb.gov.tw/V7/forecast/taiwan/inc/city/Taipei_City.htm",
+  var queryUrl = 'http://www.cwb.gov.tw/V7/forecast/taiwan/inc/city/Taipei_City.htm',
       forecastTable = new Array();
 
   var reformatDate = function (index, cell) {
