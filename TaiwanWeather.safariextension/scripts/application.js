@@ -13,6 +13,31 @@ $(document).ready(function() {
   updateForecast();
 });
 
+const realtimeStationLocation = {
+  "Taipei_City": "46692", //台北
+  "New_Taipei_City": "A0A9M", //板橋
+  "Taichung_City": "46749", //台中
+  "Tainan_City": "46741", //台南
+  "Kaohsiung_City": "46744", //高雄
+  "Keelung_City": "46694", //基隆
+  "Taoyuan_County": "46697", //桃園
+  "Hsinchu_City": "46757", //新竹
+  "Hsinchu_County": "C0D56", //竹東
+  "Miaoli_County": "C0E53", //三義
+  "Changhua_County": "C0G65", //員林
+  "Nantou_County": "C0I11", //竹山
+  "Yunlin_County": "C0K33", //虎尾
+  "Chiayi_City": "46748", //嘉義
+  "Chiayi_County": "C0M41", //大埔
+  "Pingtung_County": "46759", //恆春
+  "Yilan_County": "46708", //宜蘭
+  "Hualien_County": "46699", //花蓮
+  "Taitung_County": "46766", //台東
+  "Penghu_County": "46735", //澎湖
+  "Kinmen_County": "46711", //金門
+  "Lienchiang_County": "46799" //馬祖
+};
+
 function updateForecast() {
   var queryUrl = 'http://www.cwb.gov.tw/V7/forecast/taiwan/inc/city/Taipei_City.htm',
       forecastTable = new Array();
