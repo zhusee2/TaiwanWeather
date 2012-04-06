@@ -107,7 +107,7 @@ function updateForecast() {
     });
     
     //Update last-update badge
-    $('#forecast span.lastUpdate').text(result.lastUpdate);
+    $('h3 span.lastUpdate').text(result.lastUpdate);
 
     repaintForecastTable();
   });
