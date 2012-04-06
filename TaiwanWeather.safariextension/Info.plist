@@ -56,6 +56,8 @@
 		<key>Scripts</key>
 		<dict/>
 	</dict>
+	<key>Description</key>
+	<string>使用中央氣象局作為資料來源，快速查閱台灣天氣的小工具。</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>
@@ -72,5 +74,7 @@
 			<string>Some</string>
 		</dict>
 	</dict>
+	<key>Website</key>
+	<string>https://github.com/zhusee2/TaiwanWeather</string>
 </dict>
 </plist>
