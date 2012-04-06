@@ -39,7 +39,7 @@ const realtimeStationLocation = {
 };
 
 function updateForecast() {
-  var queryUrl = 'http://www.cwb.gov.tw/V7/forecast/taiwan/inc/city/Taipei_City.htm',
+  var queryUrl = 'http://www.cwb.gov.tw/V7/forecast/taiwan/inc/city/' + weatherArea + '.htm',
       forecastTable = new Array();
 
   var reformatDate = function (index, cell) {
@@ -115,7 +115,7 @@ function updateForecast() {
 }
 
 function updateCurrent() {
-  var queryUrl = 'http://www.cwb.gov.tw/pda/observe/real/46692.htm', //Taipei
+  var queryUrl = 'http://www.cwb.gov.tw/pda/observe/real/' + realtimeStationLocation[weatherArea] + '.htm', //Taipei
       realtimeData = {};
   
   $.get(queryUrl, function(data) {
