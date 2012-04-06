@@ -39,7 +39,7 @@
 				<key>Identifier</key>
 				<string>btnWeather</string>
 				<key>Image</key>
-				<string>icons/234-cloud.png</string>
+				<string>icons/171-sun.png</string>
 				<key>Label</key>
 				<string>台灣氣象資訊</string>
 				<key>Palette Label</key>
