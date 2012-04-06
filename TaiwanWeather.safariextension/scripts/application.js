@@ -7,11 +7,6 @@ try {
       showForecast = true,
       globalResult = null;
 }
-    
-$(document).ready(function() {
-  updateCurrent();
-  updateForecast();
-});
 
 const realtimeStationLocation = {
   "Taipei_City": "46692", //台北
@@ -144,3 +139,8 @@ function updateCurrent() {
   });
 
 }
+
+$(document).ready(function() {
+  updateCurrent();
+  updateForecast();
+});
