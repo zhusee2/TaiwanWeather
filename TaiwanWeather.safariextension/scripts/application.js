@@ -134,6 +134,9 @@ function updateCurrent() {
       realtime.weatherIcon = null;
     }
     
+    $.get('http://www.cwb.gov.tw/V7/forecast/taiwan/inc/city/' + weatherArea + '.htm', function(data) {
+      $('#current span.cityName').text($(data).find('thead th:first-child').text());
+    });
     $('#current span.desc').html(realtime.weather + ' ' + realtime.temp + '&deg;C');
     $('#current img').attr('src', realtime.weatherIcon);
     $('#current small.lastUpdate span.location').text(realtime.location);
