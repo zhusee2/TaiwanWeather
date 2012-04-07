@@ -1,4 +1,4 @@
-var weatherArea = sessionStorage.getItem('optWeatherArea') || 'Taipei_City',
+var weatherArea = localStorage.getItem('optWeatherArea') || 'Taipei_City',
     defaultTooltip = null,
     globalResult = null,
     currentWeatherForGlobalPage = {weatherIcon: null, cityName: null, temp: null, desc: null};
@@ -30,7 +30,7 @@ function initCityDropdown() {
     if (isSafari) {
       safari.extension.settings.setItem('optWeatherArea', newArea);
     } else {
-      sessionStorage.setItem('optWeatherArea', newArea);
+      localStorage.setItem('optWeatherArea', newArea);
       location.reload();
     }
     
