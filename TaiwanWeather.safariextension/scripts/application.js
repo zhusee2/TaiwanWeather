@@ -163,7 +163,7 @@ function validateCommand(event) {
         currentWeather = safari.extension.popovers[0].contentWindow.currentWeatherForGlobalPage,
         showCurrent = safari.extension.settings.optShowCurrent;
 
-    toolbarItem.toolTip = showCurrent ? (currentWeather.cityName + ' ' + currentWeather.desc) : defaultTooltip;
+    toolbarItem.toolTip = currentWeather.cityName + ' ' + currentWeather.desc;
     toolbarItem.badge = showCurrent ? currentWeather.temp : 0;
   }
 }
