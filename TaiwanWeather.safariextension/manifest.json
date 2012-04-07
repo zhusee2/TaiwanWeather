@@ -1,8 +1,12 @@
 {
   "name": "台灣氣象資訊",
-  "version": "1.1",
+  "version": "1.1.1",
   "manifest_version": 1,
   "description": "使用中央氣象局作為資料來源，快速查閱台灣天氣的小工具。",
+  "icons": {
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
   "browser_action": {
     "default_icon": "icons/171-sun.png",
     "default_popup": "popover.html"
