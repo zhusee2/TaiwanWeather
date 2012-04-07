@@ -169,8 +169,9 @@ function validateCommand(event) {
 }
 
 function settingsChanged(event) {
-  if (event.key == 'optWeatherArea') {}
-  if (event.key == 'optShowCurrent') {}
+  if (event.key == 'optWeatherArea') {
+    safari.extension.popovers[0].contentWindow.location.reload();
+  }
   if (event.key == 'optShowForecast') {
     safari.extension.popovers[0].width = event.newValue ? 600 : 250;
     safari.extension.popovers[0].height = event.newValue ? 400 : 150; 
