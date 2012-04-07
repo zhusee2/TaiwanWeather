@@ -13,6 +13,17 @@ body {
 #current small.lastUpdate {
   margin-top: 6px;
   float: right;
+  display: inline;
+}
+@media (max-width: 250px) {
+  #current strong {
+   display: block;
+  }
+  #current small.lastUpdate {
+   margin-top: 1em;
+   float: none;
+   display: inline-block;
+  }
 }
 
 table#forecast th,
@@ -28,4 +39,8 @@ table#forecast img {
 }
 table#forecast tbody td:first-child {
   font-weight: bold;
+}
+
+.hide {
+  display: none;
 }
