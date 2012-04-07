@@ -9,6 +9,19 @@ try {
       currentWeatherForGlobalPage = {};
 }
 
+function initCityDropdown() {
+  var menu = $('#current ul.dropdown-menu');
+  menu.empty();
+  
+  for(var i in cityNameEntities) {
+    var menuItem = $('<a>').html(cityNameEntities[i]).attr('href', '#' + i);
+    
+    if (i == weatherArea) menuItem.prepend('<i class="icon-ok"></i> ');
+    menuItem = $('<li>').append(menuItem);
+    
+    menu.append(menuItem);
+  }
+}
 
 function updateForecast() {
   var queryUrl = 'http://www.cwb.gov.tw/V7/forecast/taiwan/inc/city/' + weatherArea + '.htm',
@@ -114,13 +127,9 @@ function updateCurrent() {
         setTimeout(updateCurrent, 500);
       }
     }
-    
-    $.get('http://www.cwb.gov.tw/V7/forecast/taiwan/inc/city/' + weatherArea + '.htm', function(data) {
-      var cityName = $(data).find('thead th:first-child').text();
 
-      $('#current span.cityName').text(cityName);
-      currentWeatherForGlobalPage.cityName = cityName;
-    });
+    $('#current span.cityName').html(cityNameEntities[weatherArea]);
+    currentWeatherForGlobalPage.cityName = cityNameEntities[weatherArea];
 
     $('#current span.desc').html(realtime.weather + ' ' + realtime.temp + '&deg;C');
     $('#current img').attr('src', realtime.weatherIcon);
@@ -170,13 +179,16 @@ function popoverFocus(event) {
   $(event.target.document).find('h3, #forecast').toggleClass('hide', !safari.extension.settings.optShowForecast);
 }
 
-if (safari.self instanceof SafariExtensionGlobalPage) {
-  safari.application.addEventListener("validate", validateCommand);
-  safari.extension.settings.addEventListener("change", settingsChanged);
-  safari.extension.popovers[0].contentWindow.addEventListener('focus', popoverFocus);
-} else {
-  $(document).ready(function() {
-    updateForecast();
-    updateCurrent();
-  });
+if (typeof safari !== 'undefined') {
+  if (safari.self instanceof SafariExtensionGlobalPage) {
+    safari.application.addEventListener("validate", validateCommand);
+    safari.extension.settings.addEventListener("change", settingsChanged);
+    safari.extension.popovers[0].contentWindow.addEventListener('focus', popoverFocus);
+  }
 }
+
+$(document).ready(function() {
+  updateForecast();
+  updateCurrent();
+  initCityDropdown();
+});
