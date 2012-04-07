@@ -62,9 +62,9 @@
 			<string>Lienchiang_County</string>
 		</array>
 	</dict>
-  <dict>
+	<dict>
 		<key>DefaultValue</key>
-		<true/>
+		<false/>
 		<key>Key</key>
 		<string>optShowCurrent</string>
 		<key>Title</key>
