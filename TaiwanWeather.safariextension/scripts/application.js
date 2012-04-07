@@ -1,12 +1,14 @@
-try {
-  var weatherArea = safari.extension.settings.optWeatherArea,
-      globalResult = null,
-      currentWeatherForGlobalPage = {weatherIcon: null, cityName: null, temp: null, desc: null},
-      defaultTooltip = safari.extension.toolbarItems[0].tooltip;  //Prevent chinese parsed with wrong encoding in extension.
-} catch(e) {
-  var weatherArea = 'Taipei_City',
-      globalResult = null,
-      currentWeatherForGlobalPage = {};
+var weatherArea = sessionStorage.getItem('optWeatherArea') || 'Taipei_City',
+    defaultTooltip = null,
+    globalResult = null,
+    currentWeatherForGlobalPage = {weatherIcon: null, cityName: null, temp: null, desc: null};
+    
+var isSafari = (typeof safari !== 'undefined'),
+    isChrome = (typeof chrome !== 'undefined');
+
+if (isSafari) {
+  weatherArea = safari.extension.settings.optWeatherArea;
+  defaultTooltip = safari.extension.toolbarItems[0].tooltip;  //Prevent chinese parsed with wrong encoding in extension.
 }
 
 function initCityDropdown() {
@@ -192,7 +194,7 @@ function popoverFocus(event) {
   $(event.target.document).find('h3, #forecast').toggleClass('hide', !safari.extension.settings.optShowForecast);
 }
 
-if (typeof safari !== 'undefined') {
+if (isSafari) {
   if (safari.self instanceof SafariExtensionGlobalPage) {
     safari.application.addEventListener("validate", validateCommand);
     safari.extension.settings.addEventListener("change", settingsChanged);
