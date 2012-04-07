@@ -1,4 +1,5 @@
 body {
+  min-width: 600px;
   background: rgba(255,255,255,0.7);
 }
 
@@ -21,6 +22,9 @@ body {
   display: inline;
 }
 @media (max-width: 250px) {
+  body {
+    min-width: auto;
+  }
   #current strong {
    display: block;
   }
