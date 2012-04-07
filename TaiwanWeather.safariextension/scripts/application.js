@@ -1,11 +1,12 @@
 try {
   var weatherArea = safari.extension.settings.optWeatherArea,
-      showForecast = safari.extension.settings.optShowForecast,
-      globalResult = null;
+      globalResult = null,
+      currentWeatherForGlobalPage = {weatherIcon: null, cityName: null, temp: null, desc: null},
+      defaultTooltip = safari.extension.toolbarItems[0].tooltip;  //Prevent chinese parsed with wrong encoding in extension.
 } catch(e) {
   var weatherArea = 'Taipei_City',
-      showForecast = true,
-      globalResult = null;
+      globalResult = null,
+      currentWeatherForGlobalPage = {};
 }
 
 const realtimeStationLocation = {
@@ -121,26 +122,84 @@ function updateCurrent() {
       location: $(data).find('li.selectRight option:selected').text(),
       weather: dataList[1].innerText,
       temp: dataList[2].innerText
-    }
-    
-    try {
+    };
+
+    if (realtime.weather != 'X') {
       realtime.weatherIcon = $(dataList[1]).find('img').attr('src').replace(/^\//, 'http://www.cwb.gov.tw/');
-    } catch(e) {
-      realtime.weatherIcon = null;
+      currentWeatherForGlobalPage.weatherIcon = $(dataList[1]).find('img').attr('src').match(/\/(\d+)\.(png|gif)/)[1];
+    } else {
+      try {
+        var currentForecast = $('#forecast tbody tr:first-child td:nth-child(2)');
+
+        realtime.weather = currentForecast.attr('title');
+        realtime.weatherIcon = currentForecast.find('img').attr('src');
+        currentWeatherForGlobalPage.weatherIcon = realtime.weatherIcon.match(/\/(\d+)\.(png|gif)/)[1];
+      } catch(e) {
+        setTimeout(updateCurrent, 500);
+      }
     }
     
     $.get('http://www.cwb.gov.tw/V7/forecast/taiwan/inc/city/' + weatherArea + '.htm', function(data) {
-      $('#current span.cityName').text($(data).find('thead th:first-child').text());
+      var cityName = $(data).find('thead th:first-child').text();
+
+      $('#current span.cityName').text(cityName);
+      currentWeatherForGlobalPage.cityName = cityName;
     });
+
     $('#current span.desc').html(realtime.weather + ' ' + realtime.temp + '&deg;C');
     $('#current img').attr('src', realtime.weatherIcon);
     $('#current small.lastUpdate span.location').text(realtime.location);
     $('#current small.lastUpdate span.time').text(realtime.time);
+    
+    currentWeatherForGlobalPage.desc = $('#current span.desc').text();
+    currentWeatherForGlobalPage.temp = realtime.temp;
   });
 
 }
 
-$(document).ready(function() {
-  updateCurrent();
-  updateForecast();
-});
+function validateCommand(event) {
+  if (event.command === 'btnWeather') {
+    var toolbarItem = event.target,
+        currentWeather = safari.extension.popovers[0].contentWindow.currentWeatherForGlobalPage,
+        showCurrent = safari.extension.settings.optShowCurrent;
+
+    toolbarItem.toolTip = showCurrent ? (currentWeather.cityName + ' ' + currentWeather.desc) : defaultTooltip;
+    toolbarItem.badge = showCurrent ? currentWeather.temp : 0;
+  }
+}
+
+function settingsChanged(event) {
+  if (event.key == 'optWeatherArea') {}
+  if (event.key == 'optShowCurrent') {}
+  if (event.key == 'optShowForecast') {
+    safari.extension.popovers[0].width = event.newValue ? 600 : 250;
+    safari.extension.popovers[0].height = event.newValue ? 400 : 150; 
+  }
+}
+
+function popoverFocus(event) {
+  var lastUpdate = event.target.document.querySelector('#current small.lastUpdate span.time').innerText,
+      lastUpdateTime, currentTime = new Date();
+      
+  lastUpdateTime = new Date(currentTime.getFullYear() + '/' + lastUpdate + ' GMT+0800');
+  
+  if (currentTime - lastUpdateTime > 1200000) { //20mins
+    event.target.updateForecast();
+    event.target.updateCurrent();
+    
+    console.log('Updating weather info');
+  }
+  
+  $(event.target.document).find('h3, #forecast').toggleClass('hide', !safari.extension.settings.optShowForecast);
+}
+
+if (safari.self instanceof SafariExtensionGlobalPage) {
+  safari.application.addEventListener("validate", validateCommand);
+  safari.extension.settings.addEventListener("change", settingsChanged);
+  safari.extension.popovers[0].contentWindow.addEventListener('focus', popoverFocus);
+} else {
+  $(document).ready(function() {
+    updateForecast();
+    updateCurrent();
+  });
+}
