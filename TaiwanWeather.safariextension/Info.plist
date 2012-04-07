@@ -74,7 +74,9 @@
 			<string>Some</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://zhusee2.github.com/TaiwanWeather/update.plist</string>
 	<key>Website</key>
-	<string>https://github.com/zhusee2/TaiwanWeather</string>
+	<string>http://zhusee2.github.com/TaiwanWeather/</string>
 </dict>
 </plist>
