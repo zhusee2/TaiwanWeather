@@ -121,13 +121,13 @@ function updateCurrent() {
       time: dataList[0].innerText,
       location: $(data).find('li.selectRight option:selected').text(),
       weather: dataList[1].innerText,
+      weatherIcon: $(dataList[1]).find('img').attr('src').replace(/^\//, 'http://www.cwb.gov.tw/'),
       temp: dataList[2].innerText
     };
+    
+    currentWeatherForGlobalPage.weatherIcon = $(dataList[1]).find('img').attr('src').match(/\/(\d+)\.(png|gif)/)[1];
 
-    if (realtime.weather != 'X') {
-      realtime.weatherIcon = $(dataList[1]).find('img').attr('src').replace(/^\//, 'http://www.cwb.gov.tw/');
-      currentWeatherForGlobalPage.weatherIcon = $(dataList[1]).find('img').attr('src').match(/\/(\d+)\.(png|gif)/)[1];
-    } else {
+    if (currentWeatherForGlobalPage.weatherIcon >= 99) {
       try {
         var currentForecast = $('#forecast tbody tr:first-child td:nth-child(2)');
 
