@@ -21,6 +21,19 @@ function initCityDropdown() {
     
     menu.append(menuItem);
   }
+  
+  menu.on('click', 'li a', function(event) {
+    var newArea = $(this).attr('href').replace(/#/, '');
+    
+    if (isSafari) {
+      safari.extension.settings.setItem('optWeatherArea', newArea);
+    } else {
+      sessionStorage.setItem('optWeatherArea', newArea);
+      location.reload();
+    }
+    
+    event.preventDefault();
+  });
 }
 
 function updateForecast() {
