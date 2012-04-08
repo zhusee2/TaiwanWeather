@@ -3,6 +3,7 @@
 <head>
   <title>台灣天氣資訊</title>
   <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1", width=device-width" />
   <link rel="stylesheet" href="stylesheets/bootstrap.min.css" />
   <link rel="stylesheet" href="stylesheets/bootstrap-responsive.min.css" />
   <link rel="stylesheet" href="stylesheets/style.css" />
@@ -31,43 +32,49 @@
         <strong>現在天氣:</strong> <img src="" /> <span class="desc"></span> <small class="lastUpdate">(觀測站：<span class="location"></span> <span class="time"></span>)</small>
       </div>
     </div>
-    <h3>一週天氣預報 <span class="label lastUpdate"></span></h3>
-    <table id="forecast" class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>時段</th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>白天</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>晚上</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
+    <div id="forecast">
+      <h3>一週天氣預報 <span class="label lastUpdate"></span></h3>
+      <div class="scrollContainer">
+      <div class="scrollable">
+        <table id="forecastTable" class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>時段</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>白天</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>晚上</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>

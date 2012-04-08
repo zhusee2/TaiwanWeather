@@ -68,7 +68,7 @@ function updateForecast() {
   };
   
   var repaintForecastTable = function() {
-    var table = $('table#forecast');
+    var table = $('table#forecastTable');
     
     var paintCell = function(cell, data) {
       $(cell).empty().attr('title', $(data.desc).text());
@@ -133,7 +133,7 @@ function updateCurrent() {
 
     if (currentWeatherForGlobalPage.weatherIcon >= 99) {
       try {
-        var currentForecast = $('#forecast tbody tr:first-child td:nth-child(2)');
+        var currentForecast = $('#forecastTable tbody tr:first-child td:nth-child(2)');
 
         realtime.weather = currentForecast.attr('title');
         realtime.weatherIcon = currentForecast.find('img').attr('src');
@@ -173,7 +173,7 @@ function settingsChanged(event) {
     safari.extension.popovers[0].contentWindow.location.reload();
   }
   if (event.key == 'optShowForecast') {
-    safari.extension.popovers[0].width = event.newValue ? 600 : 250;
+    safari.extension.popovers[0].width = event.newValue ? 600 : 300;
     safari.extension.popovers[0].height = event.newValue ? 400 : 150; 
   }
 }
@@ -191,7 +191,7 @@ function popoverFocus(event) {
     console.log('Updating weather info');
   }
   
-  $(event.target.document).find('h3, #forecast').toggleClass('hide', !safari.extension.settings.optShowForecast);
+  $(event.target.document).find('#forecast').toggleClass('hide', !safari.extension.settings.optShowForecast);
 }
 
 if (isSafari) {
