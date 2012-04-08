@@ -172,15 +172,12 @@ function settingsChanged(event) {
   if (event.key == 'optWeatherArea') {
     safari.extension.popovers[0].contentWindow.location.reload();
   }
-  if (event.key == 'optShowForecast') {
-    safari.extension.popovers[0].width = event.newValue ? 600 : 300;
-    safari.extension.popovers[0].height = event.newValue ? 400 : 150; 
-  }
 }
 
 function popoverFocus(event) {
   var lastUpdate = event.target.document.querySelector('#current small.lastUpdate span.time').innerText,
-      lastUpdateTime, currentTime = new Date();
+      lastUpdateTime, currentTime = new Date(),
+      optShowForecast = safari.extension.settings.optShowForecast;
       
   lastUpdateTime = new Date(currentTime.getFullYear() + '/' + lastUpdate + ' GMT+0800');
   
@@ -191,7 +188,10 @@ function popoverFocus(event) {
     console.log('Updating weather info');
   }
   
-  $(event.target.document).find('#forecast').toggleClass('hide', !safari.extension.settings.optShowForecast);
+  //Hide forecast if preferred
+  $(event.target.document).find('#forecast').toggleClass('hide', !optShowForecast);
+  safari.extension.popovers[0].width = optShowForecast ? 600 : 300;
+  safari.extension.popovers[0].height = optShowForecast ? 400 : 150; 
 }
 
 if (isSafari) {
@@ -206,4 +206,5 @@ $(document).ready(function() {
   updateForecast();
   updateCurrent();
   initCityDropdown();
+  if (isChrome) $('html').addClass('chromeExtension');
 });

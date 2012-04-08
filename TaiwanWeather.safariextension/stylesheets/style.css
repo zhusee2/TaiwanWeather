@@ -2,6 +2,8 @@ body {
   background: rgba(255,255,255,0.7);
   margin: 2em auto;
 }
+.chromeExtension {
+  min-width: 560px !important;
 }
 
 #current .btn-group {
@@ -89,4 +91,8 @@ table#forecastTable tbody td:first-child {
   div#forecast::after {
     content: '提示：若您看到的表格不完整，請左右捲動表格來檢視其他部分 ➡';
   }
+}
+
+@media (max-height: 160px) {
+  body { margin-bottom: 0; }
 }
