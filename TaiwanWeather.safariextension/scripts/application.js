@@ -207,4 +207,7 @@ $(document).ready(function() {
   updateCurrent();
   initCityDropdown();
   if (isChrome) $('html').addClass('chromeExtension');
+  setTimeout(function(){
+    window.scrollTo(0, 0);
+  }, 100);
 });
