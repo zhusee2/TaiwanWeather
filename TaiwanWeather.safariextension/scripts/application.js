@@ -110,6 +110,7 @@ function updateForecast() {
     $('h3 span.lastUpdate').text(result.lastUpdate);
 
     repaintForecastTable();
+    paintTableScrollShadow();
   });
 
 }
@@ -194,6 +195,14 @@ function popoverFocus(event) {
   safari.extension.popovers[0].height = optShowForecast ? 400 : 150; 
 }
 
+function paintTableScrollShadow(event) {
+  var widthDiff = $('#forecastTable').outerWidth() - $('div.scrollable').innerWidth(),
+      tableLeft = $('#forecastTable').position().left;
+
+  $('div.scrollContainer').toggleClass('leftMost', (Math.abs(tableLeft) <= 1 && widthDiff != 0));
+  $('div.scrollContainer').toggleClass('rightMost', (widthDiff + tableLeft <= 1 && widthDiff != 0));
+}
+
 if (isSafari) {
   if (safari.self instanceof SafariExtensionGlobalPage) {
     safari.application.addEventListener("validate", validateCommand);
@@ -210,4 +219,6 @@ $(document).ready(function() {
   setTimeout(function(){
     window.scrollTo(0, 0);
   }, 100);
+  $('div.scrollable').on('scroll', paintTableScrollShadow);
+  $(window).on('resize', paintTableScrollShadow);
 });
