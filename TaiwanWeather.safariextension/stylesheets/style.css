@@ -6,6 +6,10 @@ body {
   min-width: 560px !important;
 }
 
+#current {
+  overflow: auto;
+  padding-right: 14px;
+}
 #current .btn-group {
   float: left;
   margin-right: 0.5em;
