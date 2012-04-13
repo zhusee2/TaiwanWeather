@@ -44,7 +44,6 @@ table#forecastTable tbody td:first-child {
   body {
     width: 100%;
     min-width: 0;
-    max-width: 460px;
     box-sizing: border-box;
     -webkit-text-size-adjust: 110%;
     margin: 20px auto;
@@ -63,7 +62,7 @@ table#forecastTable tbody td:first-child {
     margin: 0;
   }
   table#forecastTable img {
-    width: 3em;
+    width: 100%;
   }
   div.scrollable {
     width: 100%;
