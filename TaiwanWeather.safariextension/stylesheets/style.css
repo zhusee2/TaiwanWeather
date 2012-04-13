@@ -7,7 +7,6 @@ body {
 }
 
 #current {
-  overflow: auto;
   padding-right: 14px;
 }
 #current .btn-group {
