@@ -1,18 +1,42 @@
-var weatherArea = localStorage.getItem('optWeatherArea') || 'Taipei_City',
+var isSafari = (typeof safari !== 'undefined'),
+    isChrome = (typeof chrome !== 'undefined');
+
+var widgetSettings = isSafari ? safari.extension.settings : localStorage;
+
+var weatherArea = widgetSettings.getItem('optWeatherArea') || 'Taipei_City',
     defaultTooltip = null,
     globalResult = null,
     currentWeatherForGlobalPage = {weatherIcon: null, cityName: null, temp: null, desc: null};
     
-var isSafari = (typeof safari !== 'undefined'),
-    isChrome = (typeof chrome !== 'undefined');
+
 
 if (isSafari) {
-  weatherArea = safari.extension.settings.optWeatherArea;
   defaultTooltip = safari.extension.toolbarItems[0].tooltip;  //Prevent chinese parsed with wrong encoding in extension.
 }
 
+function initSettingsDropdown() {
+  var menu = $('#btnSettings ul.dropdown-menu');
+  
+  menu.find('li a[href^="#opt"]').each(function(index, element) {
+    var settingsKey = $(element).attr('href').replace(/#/, '');
+
+    $(element).parent().find('i').toggleClass('icon-ok', widgetSettings.getItem(settingsKey) == 'true');
+  });
+
+  menu.on('click', 'li a[href^="#opt"]', function(event) {
+    var settingsKey = $(this).attr('href').replace(/#/, ''),
+        newKey = widgetSettings.getItem(settingsKey) == ('true' || true) ? false : true; //inverse settings
+    
+    console.log(settingsKey, widgetSettings.getItem(settingsKey), newKey);
+    widgetSettings.setItem(settingsKey, newKey);
+    $(this).parent().find('i').toggleClass('icon-ok', newKey);
+    
+    event.preventDefault();
+  });
+}
+
 function initCityDropdown() {
-  var menu = $('#current ul.dropdown-menu');
+  var menu = $('#btnCityDropdown ul.dropdown-menu');
   menu.empty();
   
   for(var i in cityNameEntities) {
@@ -27,12 +51,8 @@ function initCityDropdown() {
   menu.on('click', 'li a', function(event) {
     var newArea = $(this).attr('href').replace(/#/, '');
     
-    if (isSafari) {
-      safari.extension.settings.setItem('optWeatherArea', newArea);
-    } else {
-      localStorage.setItem('optWeatherArea', newArea);
-      location.reload();
-    }
+    widgetSettings.setItem('optWeatherArea', newArea);
+    location.reload();
     
     event.preventDefault();
   });
@@ -214,6 +234,7 @@ if (isSafari) {
 $(document).ready(function() {
   updateForecast();
   updateCurrent();
+  initSettingsDropdown();
   initCityDropdown();
   if (isChrome) $('html').addClass('chromeExtension');
   setTimeout(function(){

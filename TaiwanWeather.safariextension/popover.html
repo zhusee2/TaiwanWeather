@@ -19,7 +19,19 @@
 <body>
   <div class="container">
     <div id="current" class="alert alert-info">
-      <div class="btn-group">
+      <div id="btnSettings" class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-cog"></i>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#optShowCurrent"><i class=""></i> 在按鈕上顯示現在氣溫</a></li>
+          <li><a href="#optShowForecast"><i class="icon-ok"></i> 顯示一週天氣預報</a></li>
+          <li class="divider"></li>
+          <li><a href="http://www.cwb.gov.tw/V7/forecast/taiwan/Taipei_City.htm" target="_blank">開啟中央氣象局網頁</a></li>
+        </ul>
+      </div>
+      <div id="btnCityDropdown" class="btn-group">
         <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
           <span class="cityName">Loading&hellip;</span>
           <span class="caret"></span>
